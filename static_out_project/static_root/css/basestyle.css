@@ -1,0 +1,22 @@
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+.w3-margin-bottom{
+  margin-bottom: 100px;
+}
+
+.wrapper-content{
+  min-height: 100%;
+}
+
+.wrapper-content{
+  /*overflow:auto;*/
+  padding-bottom:10%; /* this needs to be bigger than footer height*/
+}
+
+
+
+/* IE 6 */
+* html footer {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}

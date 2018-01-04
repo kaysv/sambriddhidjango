@@ -1,0 +1,35 @@
+
+.line-input-black{
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+
+.line-input-green{
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #009688;
+}
+
+#editSavedProfile,#editFinishedSavedProfile,#profile-image:hover{
+  cursor: pointer;
+}
+.avoid-clicks {
+  pointer-events: none !important;
+  /*cursor: progress !important;*/
+}
+
+.show-pointer{
+  cursor: pointer !important;
+}
+
+#colorSelector{
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: url(http://www.eyecon.ro/colorpicker/images/select.png);
+}

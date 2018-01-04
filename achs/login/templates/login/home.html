@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block customcss %}
+  <link rel="stylesheet" href="{% static 'login/css/loginreg.css' %}">
+
+  <link rel="stylesheet" href="{% static 'login/css/slider.css' %}">
+  <link rel="stylesheet" href="{% static 'login/css/snackbar.css' %}">
+  <link rel="stylesheet" href="{% static 'login/css/animating-glyph.css' %}">
+{% endblock%}
+
+
+
+{% block content %}
+<nav  class="w3-container w3-teal w3-center w3-margin-bottom">
+  <p style="font-size:50px;">eCV</p>
+  {% if user.is_authenticated %}
+  <p><a href="/edit/" class="text-center" style="color:white;font-size:20px;"><span class="glyphicon glyphicon-edit"></span></a></p>
+  {% endif %}
+</nav>
+{% if user.is_authenticated %}
+{# Authenticated block #}
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+    <!-- Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="https://www.w3schools.com/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>Jane Doe</h2>
+          </div>
+        </div>
+        <div class="w3-container" style="padding-top:20px;">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Designer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@mail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+          <p>Adobe Photoshop</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+          </div>
+          <p>Photography</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
+              <div class="w3-center w3-text-white">80%</div>
+            </div>
+          </div>
+          <p>Illustrator</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:75%">75%</div>
+          </div>
+          <p>Media</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+          </div>
+          <br>
+
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+          <p>English</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>Spanish</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+          </div>
+          <p>German</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
+          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
+          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
+        </div>
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
+          <p>Web Development! All I need to know in one place</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>London Business School</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+          <p>Master Degree</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>School of Coding</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+          <p>Bachelor Degree</p><br>
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+
+
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+
+{% else %}
+{# Not Authenticated block #}
+<!-- <div class="container">
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    {{form.error}}
+    <button type="submit">Login</button>
+  </form>
+</div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="input-group" style="margin-bottom:10px;">
+          <input id="search-for-input" type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button id="search-for-button" class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="#" class="active" id="login-form-link">Login</a>
+              </div>
+              <div class="col-xs-6">
+                <a href="#" id="register-form-link">Register</a>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="login-form" action="" method="post" role="form" style="display: block;">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control to-lower" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <!-- <input type="submit" name="Login" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In"> -->
+                        <input name="Login" value="Sign In" hidden>
+                        <button id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" >Login</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="text-center">
+                          <a id="forgot-password" href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <!-- <form id="register-form" action="/registration/" method="post" role="form" style="display: none;"> -->
+                <form id="register-form" style="display: none;">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <!-- <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required> -->
+                    <div id="usernameError">
+                      <!-- <span style='color:green' class='pull-right glyphicon glyphicon-ok-sign'></span>
+                      <span style='color:red' class='pull-right glyphicon glyphicon-info-sign'></span>
+                      <span class='pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> -->
+                      <br>
+                    </div>
+                    {{signUpForm.username|add_class:'form-control to-lower'|attr:"placeholder:Enter username"}}
+                  </div>
+                  <div class="form-group">
+                    <!-- <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" required> -->
+                    <div id="emailError">
+                      <!-- Some span will cover this -->
+                      <br>
+                    </div>
+                    {{signUpForm.email|add_class:'form-control to-lower'|attr:"placeholder:Enter email"}}
+                  </div>
+                  <div class="form-group">
+                    <!-- <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required> -->
+                    <div id="password1Error">
+                      <!-- Some span will cover this -->
+                      <br>
+                    </div>
+                    {{signUpForm.password1|add_class:'form-control'|attr:"placeholder:Enter password"}}
+                  </div>
+                  <div class="form-group">
+                    <!-- <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" required> -->
+                    <div id="password2Error">
+                      <!-- Some span will cover this -->
+                      <br>
+                    </div>
+                    {{signUpForm.password2|add_class:'form-control'|attr:"placeholder:Retype password"}}
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <button name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register">Register Now</butto>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+<!-- snackbar -->
+<div id="snackbar" >
+  <p style="width:100%;text-align:center;">Some text some message..</p>
+</div>
+<!-- snackbar end -->
+{% endblock%}
+
+
+
+{% block extrajs %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{% static 'login/js/loginreg.js' %}" type="text/javascript"></script>
+<script src="{% static 'login/js/ajaxlogin.js' %}" type="text/javascript"></script>
+<script src="{% static 'login/js/snackbar.js' %}" type="text/javascript"></script>
+<script src="{% static 'login/js/ajaxreg.js' %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  //Validating username
+  var username_valid = false;
+  var email_valid = false;
+  var password1_valid = false;
+  var password2_valid = false;
+  $("#register-form")[0].reset();
+  $("#id_username").change(function(){
+        $("#register-submit").css("pointer-events","none");
+        var filter = /^[A-z]+$/;
+        if(!($(this).val().length>2 && filter.test($(this).val()))){
+          valid=false;
+          $("#usernameError").html("<span id='wrongUsername' style='color:red' class='pull-right glyphicon glyphicon-info-sign'></span><br>")
+        }else{
+          $("#usernameError").html("<span id='spanusernameProcess' class='pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate'></span><br>")
+          var formData=new FormData();
+          formData.append('username',$(this).val())
+          formData.append('type','check_user_exist');
+          formData.append('csrfmiddlewaretoken','{{ csrf_token }}');
+          $.ajax({
+            type:"POST",
+            url:"/",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function(result){
+              if(result=="exists"){
+                $("#usernameError").html("<span id='spanusernameError' style='color:red' class='pull-right glyphicon glyphicon-info-sign'></span><br>");
+                username_valid=false;
+              }else if (result=="notexists") {
+                $("#usernameError").html("<span id='spanusernameSuccess' style='color:green' class='pull-right glyphicon glyphicon-ok-sign'></span><br>");
+                $("#register-submit").css("pointer-events","auto");
+                username_valid=true;
+              }else {
+                $("#usernameError").html("<span id='spanusernameServerError' style='color:orange' class='pull-right glyphicon glyphicon-info-sign'></span><br>");
+                username_valid=false;
+              }
+            },
+            error:function(result){
+              $("#usernameError").html("<span id='spanusernameServerError' style='color:orange' class='pull-right glyphicon glyphicon-info-sign'></span><br>");
+              username_valid=false;
+            }
+          });
+      };
+  });
+</script>
+
+{% endblock %}

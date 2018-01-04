@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+  <link rel="stylesheet" href="{% static 'login/css/alertify.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'login/css/inputstyle.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'login/css/slider.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'login/css/snackbar.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'login/css/animating-glyph.css' %}" type="text/css" />
+
+{% endblock%}
+
+{% block content %}
+<nav  class="w3-container w3-teal w3-center w3-margin-bottom">
+  <div class="col-md-2 col-md-offset-5 container-fluid">
+    <p style="font-size:50px;">{{request.user.username}}</p>
+    <hr>
+    <p>eCV</p>
+  </div>
+</nav>
+
+<!-- snackbar -->
+<div id="snackbar" >
+  <p style="width:100%;text-align:center;">Some text some message..</p>
+</div>
+<!-- snackbar end -->
+
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+    <!-- Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container" style="padding-bottom:20px;">
+          <div class="" style="position:absolute;font-size:20px;left:5px;top:5px;">
+            <span id="editSavedProfile" class="glyphicon glyphicon-edit" style="display:block;color:white;"></span>
+            <span id="editFinishedSavedProfile" class="glyphicon glyphicon-ok" style="display:none;color:white;"></span>
+          </div>
+          <div class="">
+            <!-- <input id="profile-image-upload" type="file" class="hidden" name="" value="" onchange="updateImage(this);"> -->
+            <!-- <input id="profile-image-upload" type="file" class="hidden" name="" value=""> -->
+            <!-- <img id="profile-image" src="https://www.w3schools.com/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar"> -->
+            {% if edited %}
+            <img class="avoid-clicks" id="profile-image" src="{{image.url}}" style="width:100%;" alt="Avatar" >
+            {% else %}
+            <img id="profile-image" src="{% static 'login/img/profile.png' %}" style="width:100%;" alt="Avatar">
+            {% endif %}
+          </div>
+          <!-- <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>Jane Doe</h2>
+            <div class="editSection">
+              <h1 id="profileHead"><input id="profileName" class="line-input-black" type="text" name="name" placeholder="Your Name" disabled="True" required></h1>
+              <span id="nameSuccess" class="pull-right glyphicon glyphicon-ok" style="display:none;"></span>
+              <span id="nameError" class="pull-right glyphicon glyphicon-ok" style="display:none;"></span>
+            </div>
+
+          </div> -->
+          <div class="showProfile w3-display-bottomleft w3-container w3-text-black" style="padding-bottom:20px;">
+            <h2 id="labelShowName" class="form-control" style="color:white;background:#009688;overflow:auto;height:100%;">{{name}}</h2>
+          </div>
+        </div>
+        <div class="w3-container" style="padding-top:20px;">
+          <div class="showProfile">
+            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><label id="labelShowTitle">{{title}}</label></p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><label id="labelShowAddress">{{address}}</label></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><label id="labelShowEmail">{{email}}</label></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><label id="labelShowPhone">{{phone}}</label></p>
+            <hr>
+          </div>
+
+          <form id="profileForm" style="display:none;">
+            {% csrf_token %}
+            {% if edited %}
+              <input id="profile-image-upload" type="file" class="hidden" name="profileImage" value="" >
+            {% else %}
+              <input id="profile-image-upload" type="file" class="hidden" name="profileImage" value="">
+            {% endif %}
+            <div class="" style="position:relative;">
+              {% if edited %}
+              <div class="picker"></div>
+              <h1 id="profileNameHead"><input id="profileName" class="line-input-black input-lg" type="text" name="name" placeholder="Name" value="{{name}}" required></h1>
+              <span id="nameSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:block;"></span>
+              <span id="nameError" class="pull-right glyphicon glyphicon-info-sign" style="display:none;"></span>
+              <span id="nameProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% else %}
+              <h1 id="profileNameHead"><input id="profileName" class="line-input-black" type="text" name="name" placeholder="Name" required></h1>
+              <span id="nameSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:none;"></span>
+              <span id="nameError" class="pull-right glyphicon glyphicon-info-sign" style="display:block;"></span>
+              <span id="nameProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% endif %}
+              <br>
+            </div>
+            <hr>
+            <div class="">
+              {% if edited %}
+              <p id="profileTitleHead"><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileTitle" class="line-input-green pull-right" type="text" name="title" placeholder="Title"  value = "{{title}}" required></p><br>
+              <span id="titleSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:block;"></span>
+              <span id="titleError" class="pull-right glyphicon glyphicon-info-sign" style="display:none;"></span>
+              <span id="titleProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% else %}
+              <p id="profileTitleHead"><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileTitle" class="line-input-green pull-right" type="text" name="title" placeholder="Title"  required></p><br>
+              <span id="titleSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:none;"></span>
+              <span id="titleError" class="pull-right glyphicon glyphicon-info-sign" style="display:block;"></span>
+              <span id="titleProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% endif %}
+              <br>
+
+              {% if edited %}
+              <p id="profileAddressHead"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileAddress" class="line-input-green pull-right" type="text" name="address" placeholder="Address" value={{address}}  required></p><br>
+              <span id="addressSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:block;"></span>
+              <span id="addressError" class="pull-right glyphicon glyphicon-info-sign" style="display:none;"></span>
+              <span id="addressProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% else %}
+              <p id="profileAddressHead"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileAddress" class="line-input-green pull-right" type="text" name="address" placeholder="Address"  required></p><br>
+              <span id="addressSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:none;"></span>
+              <span id="addressError" class="pull-right glyphicon glyphicon-info-sign" style="display:block;"></span>
+              <span id="addressProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% endif %}
+              <br>
+              {% if edited %}
+              <p id="profileEmailHead"><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileEmail" class="line-input-green pull-right" type="text" name="email" placeholder="Email" value="{{email}}"  required></p><br>
+              <span id="emailSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:block;"></span>
+              <span id="emailError" class="pull-right glyphicon glyphicon-info-sign" style="display:none;"></span>
+              <span id="emailProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% else %}
+              <p id="profileEmailHead"><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profileEmail" class="line-input-green pull-right" type="text" name="email" placeholder="Email"  required></p><br>
+              <span id="emailSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:none;"></span>
+              <span id="emailError" class="pull-right glyphicon glyphicon-info-sign" style="display:block;"></span>
+              <span id="emailProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% endif %}
+              <br>
+              {% if edited %}
+              <p id="profilePhoneHead"><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profilePhone" class="line-input-green pull-right" type="text" name="phone" placeholder="Phone Number" value="{{phone}}" required></p><br>
+              <span id="phoneSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:block;"></span>
+              <span id="phoneError" class="pull-right glyphicon glyphicon-info-sign" style="display:none;"></span>
+              <span id="phoneProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% else %}
+              <p id="profilePhoneHead"><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><input id="profilePhone" class="line-input-green pull-right" type="text" name="phone" placeholder="Phone Number"  required></p><br>
+              <span id="phoneSuccess" class="pull-right glyphicon glyphicon-ok-sign" style="display:none;"></span>
+              <span id="phoneError" class="pull-right glyphicon glyphicon-info-sign" style="display:block;"></span>
+              <span id="phoneProcessing" class="pull-right glyphicon glyphicon-refresh glyphicon-refresh-animate" style="display:none;"></span>
+              {% endif %}
+              <br>
+              <div id="profileSubmitDiv"class="">
+                {% if edited %}
+                    <p id="profileSubmit" class="btn btn-primary pull-right text-center" style="display:block;"><i class="fa-fw w3-margin-right w3-large w3-text-teal"></i>Save&nbsp&nbsp&nbsp<span id="showProfileSubmitProcess" class="glyphicon glyphicon-floppy-saved"></span></p><br>
+                {% else %}
+                    <p id="profileSubmit" class="btn btn-primary pull-right text-center" style="display:none;"><i class="fa-fw w3-margin-right w3-large w3-text-teal"></i>Save&nbsp&nbsp&nbsp<span id="showProfileSubmitProcess" class="glyphicon glyphicon-floppy-saved"></span></p><br>
+                {% endif %}
+            </div>
+            </div>
+            <br>
+            <hr>
+          </form>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+
+          <!--  Skills Content goes here dynamically-->
+          <div id="skills_collection">
+          </div>
+          <!--  Skills Content finished here-->
+
+          <br>
+          <button id="addSkills" class="form-control btn-success"type="button" name="button" style="text-decoration:none;" >Add Skills</button>
+          <br>
+
+          <p class="btn btn-primary pull-right text-center" id="saveSkill" style="display:block;"><i class="fa-fw w3-margin-right w3-large w3-text-teal"></i>Save&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-floppy-saved"></span></p><br>
+          <br>
+          <hr>
+
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+
+          <!-- Language Content goes here dynamically -->
+          <div id="language_collection">
+
+          </div>
+          <!--  Language Content finished here-->
+          <br>
+          <button id="addLanguage" class="form-control btn-success"type="button" name="button">Add Language</button>
+          <br>
+
+          <p class="btn btn-primary pull-right text-center" id="saveLanguage" style="display:none;"><i class="fa-fw w3-margin-right w3-large w3-text-teal"></i>Save&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-floppy-saved"></span></p><br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
+          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
+          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
+        </div>
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
+          <p>Web Development! All I need to know in one place</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>London Business School</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+          <p>Master Degree</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>School of Coding</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+          <p>Bachelor Degree</p><br>
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+
+
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+{% endblock %}
+
+{% block extrajs %}
+  <script src="{% static 'login/js/loadphoto.js' %}" type="text/javascript"></script>
+  <script src="{% static 'login/js/form-validation.js' %}" type="text/javascript"></script>
+  <script src="{% static 'login/js/range-display.js' %}" type="text/javascript"></script>
+  <script src="{% static 'login/js/left-dynamic-content.js' %}" type="text/javascript"></script>
+  <script src="{% static 'login/js/snackbar.js' %}" type="text/javascript"></script>
+  <script src="{% static 'login/js/alertify.js' %}" type="text/javascript"></script>
+  <!-- <script src="{% static 'login/js/ngAlertify.js' %}" type="text/javascript"></script> -->
+  <!-- <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script> -->
+{% endblock %}

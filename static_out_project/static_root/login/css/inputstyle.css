@@ -1,0 +1,19 @@
+.line-input-black{
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+
+.line-input-green{
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #009688;
+}
+
+#profile-image:hover{
+  cursor: pointer;
+}
